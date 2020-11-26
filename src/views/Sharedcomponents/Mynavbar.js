@@ -16,7 +16,7 @@ const Mynavbar = () => {
           <Nav className="ml-auto">
             <Nav.Link href="#inicio">Inicio</Nav.Link>
             <Nav.Link href="#login">Login</Nav.Link>
-            <Nav.Link href="#login">Nueva cuenta</Nav.Link>
+            <Nav.Link href="#register">Nueva cuenta</Nav.Link>
           </Nav>
         </Navbar.Collapse>
       </Navbar>

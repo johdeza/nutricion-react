@@ -20,7 +20,7 @@ const Login = () => {
   return (
     <div>
       <Mynavbar></Mynavbar>
-      <hr />
+
       <br />
       <div className="container">
         <div className="jumbotron">
