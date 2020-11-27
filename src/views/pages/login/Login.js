@@ -2,19 +2,33 @@ import React, { useState } from "react";
 import Mynavbar from "../../Sharedcomponents/Mynavbar.js";
 import Myfooter from "../../Sharedcomponents/Myfooter.js";
 import axios from "axios";
+import { useHistory } from "react-router-dom";
 
 const Login = () => {
+  let history = useHistory();
   const [userInfo, setUserInfo] = useState({ email: "", password: "" });
 
-  const SaveData = async (UserInfo) => {
-    debugger;
-    console.log(UserInfo);
+  const handleInputChange = (event) => {
+    // console.log(event.target.name)
+    // console.log(event.target.value)
+    setUserInfo({
+      ...userInfo,
+      [event.target.name]: event.target.value,
+    });
+  };
+
+  const enviarDatos = async (event) => {
+    event.preventDefault();
     try {
       const respon = await axios.post(
         "http://3.90.64.114/api/v1/web/login",
-        UserInfo
+        userInfo
       );
-    } catch (error) {}
+      history.push("/dashboard");
+      alert("Bienvenido al sistema de nutrición");
+    } catch (error) {
+      alert(error.response.data);
+    }
   };
 
   return (
@@ -26,7 +40,7 @@ const Login = () => {
         <div className="jumbotron">
           <p className="display-4 text-center lead">Iniciar sesión</p>
           <hr className="my-4" />
-          <form>
+          <form onSubmit={enviarDatos}>
             <p className="display-8 text-center">Credenciales de acceso</p>
             <div className="form-group row ">
               <div className="col-sm-6 mb-1">
@@ -35,7 +49,7 @@ const Login = () => {
                   className="form-control"
                   placeholder="Correo electrónico"
                   name="email"
-                  onChange={(e) => setUserInfo(e.target.value)}
+                  onChange={handleInputChange}
                 />
               </div>
               <div className="col-sm-6 mb-1">
@@ -44,7 +58,7 @@ const Login = () => {
                   className="form-control"
                   placeholder="Contraseña!"
                   name="password"
-                  onChange={(e) => setUserInfo(e.target.value)}
+                  onChange={handleInputChange}
                 />
               </div>
             </div>
@@ -55,7 +69,7 @@ const Login = () => {
               <button
                 className="btn btn-primary btn-lg ml-auto"
                 type="submit"
-                onClick={() => SaveData(userInfo)}
+                // onClick={() => SaveData(userInfo)}
               >
                 Iniciar sesión
               </button>
