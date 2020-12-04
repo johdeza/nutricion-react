@@ -10,11 +10,11 @@ const Mynavbar = () => {
   return (
     <div>
       <Navbar collapseOnSelect expand="lg" bg="dark" variant="dark">
-        <Navbar.Brand href="#inicio">Nutrición</Navbar.Brand>
+        <Navbar.Brand href="/">Nutrición</Navbar.Brand>
         <Navbar.Toggle aria-controls="responsive-navbar-nav" />
         <Navbar.Collapse id="responsive-navbar-nav">
           <Nav className="ml-auto">
-            <Nav.Link href="#inicio">Inicio</Nav.Link>
+            <Nav.Link href="/">Inicio</Nav.Link>
             <Nav.Link href="#login">Login</Nav.Link>
             <Nav.Link href="#register">Nueva cuenta</Nav.Link>
           </Nav>

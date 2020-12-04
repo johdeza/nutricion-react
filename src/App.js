@@ -26,7 +26,7 @@ class App extends Component {
           <Switch>
             <Route
               exact
-              path="/inicio"
+              path="/"
               name="Inicio Page"
               render={(props) => <Inicio {...props} />}
             />
@@ -54,11 +54,11 @@ class App extends Component {
               name="Page 500"
               render={(props) => <Page500 {...props} />}
             />
-            <Route
+            {/* <Route
               path="/"
               name="Home"
               render={(props) => <TheLayout {...props} />}
-            />
+            /> */}
           </Switch>
         </React.Suspense>
       </HashRouter>
