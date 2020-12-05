@@ -20,17 +20,17 @@ import {
 
 const Toaster = () => {
 
-  const positions = [
-    'static',
-    'top-left',
-    'top-center',
-    'top-right',
-    'top-full',
-    'bottom-left',
-    'bottom-center',
-    'bottom-right',
-    'bottom-full'
-  ]
+  // const positions = [
+  //   'static',
+  //   'top-left',
+  //   'top-center',
+  //   'top-right',
+  //   'top-full',
+  //   'bottom-left',
+  //   'bottom-center',
+  //   'bottom-right',
+  //   'bottom-full'
+  // ]
 
   const [toasts, setToasts] = useState([
     { position: 'static'},
@@ -38,7 +38,7 @@ const Toaster = () => {
     { position: 'top-right', autohide: 3000 }
   ])
 
-  const [position, setPosition] = useState('top-right')
+  const [position, setPosition] = useState('bottom-center')
   const [autohide, setAutohide] = useState(true)
   const [autohideValue, setAutohideValue] = useState(5000)
   const [closeButton, setCloseButton] = useState(true)
@@ -98,7 +98,7 @@ const Toaster = () => {
                   </CFormGroup>
                 }
 
-                <CFormGroup className="my-2">
+                {/* <CFormGroup className="my-2">
                   <CLabel htmlFor="ccyear">Position</CLabel>
                   <select
                     className="form-control"
@@ -111,7 +111,7 @@ const Toaster = () => {
                       ))
                     }
                   </select>
-                </CFormGroup>
+                </CFormGroup> */}
 
                 <CFormGroup variant="custom-checkbox" className="my-2">
                   <CInputCheckbox

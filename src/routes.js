@@ -60,9 +60,28 @@ const Widgets = React.lazy(() => import("./views/widgets/Widgets"));
 const Users = React.lazy(() => import("./views/users/Users"));
 const User = React.lazy(() => import("./views/users/User"));
 
+const Pacientes = React.lazy(() => import('./views/pages/pacientes/Pacientes'));
+const Nutriologos = React.lazy(() => import('./views/pages/nutriologos/Nutriologos'));
+const Categoria = React.lazy(() => import('./views/pages/categorias/Categorias'));
+const Alimentos = React.lazy(() => import('./views/pages/alimentos/Alimentos'));
+const Actividades = React.lazy(() => import('./views/pages/actividades/Actividades'));
+
+const Perfil = React.lazy(() => import('./views/pages/perfil/Perfil'));
+const Login = React.lazy(() => import('./views/pages/login/Login'));
+
 const routes = [
   { path: "/", exact: true, name: "Inicio" },
   { path: "/dashboard", name: "Dashboard", component: Dashboard },
+
+  { path: '/pacientes/', name: 'Pacientes', component: Pacientes },
+  { path: '/nutriologos/', component: Nutriologos },
+  { path: '/categorias/', component: Categoria },
+  { path: '/alimentos/', name: 'Alimentos', component: Alimentos },
+  { path: '/actividades/', name: 'Actividades', component: Actividades },
+  
+  { path: '/perfil/', name: 'Perfil', component: Perfil },
+  { path: '/login/', name: 'Login', component: Login },
+
   { path: "/theme", name: "Theme", component: Colors, exact: true },
   { path: "/theme/colors", name: "Colors", component: Colors },
   { path: "/theme/typography", name: "Typography", component: Typography },

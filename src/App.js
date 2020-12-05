@@ -25,10 +25,10 @@ class App extends Component {
         <React.Suspense fallback={loading}>
           <Switch>
             <Route
-              exact
+              // exactnpm start
               path="/"
               name="Inicio Page"
-              render={(props) => <Inicio {...props} />}
+              render={(props) => <TheLayout {...props} />}
             />
             <Route
               exact
