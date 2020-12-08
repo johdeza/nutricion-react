@@ -3,6 +3,7 @@ import Mynavbar from "../../Sharedcomponents/Mynavbar.js";
 import Myfooter from "../../Sharedcomponents/Myfooter.js";
 import axios from "axios";
 import { useHistory } from "react-router-dom";
+import { CButton } from "@coreui/react";
 
 const Login = () => {
   let history = useHistory();
@@ -64,23 +65,20 @@ const Login = () => {
               <a className="btn btn-danger btn-lg" href="#">
                 Cancelar
               </a>
-              <button
-                className="btn btn-primary btn-lg ml-auto"
-                type="submit"
-                // onClick={() => SaveData(userInfo)}
-              >
+              <button className="btn btn-primary btn-lg ml-auto" type="submit">
                 Iniciar sesión
               </button>
             </div>
             <hr className="my-4" />
             <div className="form-group row ">
               <div className="col-sm-6 mb-1">
-                <a href="" className="text-info">
+                {/* <a href="" className="text-info">
                   ¿Olvidaste tu contraseña?
-                </a>
+                </a> */}
+                <CButton className="mr-1">¿Olvidaste tu contraseña? </CButton>
               </div>
               <div className="col-sm-6 mb-1">
-                <a href="" className="text-info">
+                <a href="#register" className="text-info">
                   ¿No tiene una cuenta?
                 </a>
               </div>
