@@ -9,8 +9,6 @@ const Login = () => {
   const [userInfo, setUserInfo] = useState({ email: "", password: "" });
 
   const handleInputChange = (event) => {
-    // console.log(event.target.name)
-    // console.log(event.target.value)
     setUserInfo({
       ...userInfo,
       [event.target.name]: event.target.value,

@@ -25,10 +25,10 @@ class App extends Component {
         <React.Suspense fallback={loading}>
           <Switch>
             <Route
-              // exactnpm start
+              exact
               path="/"
               name="Inicio Page"
-              render={(props) => <TheLayout {...props} />}
+              render={(props) => <Inicio {...props} />}
             />
             <Route
               exact
@@ -54,11 +54,11 @@ class App extends Component {
               name="Page 500"
               render={(props) => <Page500 {...props} />}
             />
-            {/* <Route
+            <Route
               path="/"
               name="Home"
               render={(props) => <TheLayout {...props} />}
-            /> */}
+            />
           </Switch>
         </React.Suspense>
       </HashRouter>

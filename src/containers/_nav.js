@@ -213,34 +213,34 @@ export default [
   //     },
   //   ],
   // },
-  {
-    _tag: 'CSidebarNavDropdown',
-    name: 'Notifications',
-    route: '/notifications',
-    icon: 'cil-bell',
-    _children: [
-      {
-        _tag: 'CSidebarNavItem',
-        name: 'Alerts',
-        to: '/notifications/alerts',
-      },
-      {
-        _tag: 'CSidebarNavItem',
-        name: 'Badges',
-        to: '/notifications/badges',
-      },
-      {
-        _tag: 'CSidebarNavItem',
-        name: 'Modal',
-        to: '/notifications/modals',
-      },
-      {
-        _tag: 'CSidebarNavItem',
-        name: 'Toaster',
-        to: '/notifications/toaster'
-      }
-    ]
-  },
+  // {
+  //   _tag: 'CSidebarNavDropdown',
+  //   name: 'Notifications',
+  //   route: '/notifications',
+  //   icon: 'cil-bell',
+  //   _children: [
+  //     {
+  //       _tag: 'CSidebarNavItem',
+  //       name: 'Alerts',
+  //       to: '/notifications/alerts',
+  //     },
+  //     {
+  //       _tag: 'CSidebarNavItem',
+  //       name: 'Badges',
+  //       to: '/notifications/badges',
+  //     },
+  //     {
+  //       _tag: 'CSidebarNavItem',
+  //       name: 'Modal',
+  //       to: '/notifications/modals',
+  //     },
+  //     {
+  //       _tag: 'CSidebarNavItem',
+  //       name: 'Toaster',
+  //       to: '/notifications/toaster'
+  //     }
+  //   ]
+  // },
   // {
   //   _tag: 'CSidebarNavItem',
   //   name: 'Widgets',

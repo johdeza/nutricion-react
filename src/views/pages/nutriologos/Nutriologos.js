@@ -7,10 +7,7 @@ import {
   CCol,
   CRow,
   CButton,
-  CForm,
-  CFormGroup,
-  CInput,
-  CLabel,
+  CCollapse,
   CDataTable
 } from '@coreui/react'
 import axios from 'axios';
@@ -22,38 +19,19 @@ import {Modal, ModalBody, ModalFooter, ModalHeader} from 'reactstrap';
 const Nutriologos = () => {
 
   const [nutriologos, setNutriologos] = useState([]);
-  const [nutriologo, setNutriologo] = useState({});
 
-  // eslint-disable-next-line react-hooks/rules-of-hooks
   useEffect(() => {
     const obtenerNutriologos = async () => {
       try {
         const resultado = await axios.get('http://3.90.64.114/api/v1/mobile/nutriologist/');
-        // setNutriologos(resultado.data.user.name);
-        // setNutriologos(resultado.data);
-        // setNutriologo(resultado.data.map(i=>i.user));
-        // setNutriologos(resultado.data.map(i=>i.id), resultado.data.map(i=>i.user));
-        // setNutriologo(resultado.data.map(i=>i.id), resultado.data.map(i=>i.user.name));
-        // var x={
-        //   "id":resultado.data.map(i=>i.id),
-        //   "name": resultado.data.map(i=>i.user.name)
-        // }
-        // setNutriologo(x);
-        var s=resultado.data;
-        var a =resultado.data.map(i=>i.id);
-        // console.log(s);
-        var name = resultado.data.map(i=>i.user.name);
-        console.log(resultado.data.map(i=>i.user.name));
-        s[0].nombre = name;
-        console.log(s.name);
-        setNutriologos(s);
-        // var obj = Object.assign(s,x);
-        // console.log(Object.assign(a,x));
-        // // s.name=resultado.data.map(i=>i.user.name);
-        // console.log(obj);
-        // setNutriologos(x);
-        // setNutriologo(setNutriologos);
-        // console.log(resultado.data.map(i=>i.user));
+        const alimentoCategoria = resultado.data.map(item=>{
+          return{
+            ...item,
+          nombre: item.user.name
+        }
+      })
+      console.log(alimentoCategoria);
+      setNutriologos(alimentoCategoria);
       } catch (error) {
         console.log(error);
       }
@@ -61,114 +39,98 @@ const Nutriologos = () => {
     obtenerNutriologos();
   }, []);
 
-  const fields = ['id', 'nombre', '']
+  const [details, setDetails] = useState([])
+
+  const toggleDetails = (index) => {
+    const position = details.indexOf(index)
+    let newDetails = details.slice()
+    if (position !== -1) {
+      newDetails.splice(position, 1)
+    } else {
+      newDetails = [...details, index]
+    }
+    setDetails(newDetails)
+  }
+
+  const fields = [
+    { key: 'id', label:'Id', _style: { width: '10%'} },
+    { key: 'nombre', label:'Nutriólogo', _style: { width: '40%'} },
+    {
+      key: 'Opciones',
+      label: '',
+      _style: { width: '1%' },
+      sorter: false,
+      filter: false
+    }
+  ]
+
   return (
     <>
-     {/* <CRow>        
-        <CCol xs="12" md="12">
-          <CCard>
-            <CCardHeader>
-              Nutiologos
-            </CCardHeader>
-            <CCardBody>
-              <CForm action="" method="post" className="form-horizontal">
-                <CFormGroup row>
-                  <CCol md="1">
-                    <CLabel htmlFor="hf-email">Nombre:</CLabel>
-                  </CCol>
-                  <CCol xs="1" md="3">
-                    <CInput type="email" id="hf-email" name="hf-email" placeholder="Ingrese Nombre" autoComplete="text" />
-                  </CCol>
-                </CFormGroup>
-                <CFormGroup row>
-                <CCol xs="1" md="3">
-                <CButton size="sm" color="primary">
-                  <CIcon name="cil-scrubber" /> Consultar
-                  </CButton> 
-                  </CCol>
-                  <CCol xs="1" md="3">
-                  <CButton size="sm" color="primary">
-                  <CIcon name="cil-scrubber" /> Agregar
-                  </CButton> 
-                  </CCol>
-                  </CFormGroup>
-              </CForm>
-            </CCardBody>
-           </CCard>
-        </CCol>
-      </CRow>
-      <CRow>
-        <CCol>
-          <CCard> */}
-            {/* <CCardHeader>
-              Nutriologos
-            </CCardHeader> */}
-            {/* <CCardBody>
-            <table className="table">
-              <thead>
-                <tr>
-                  <td>ID</td>
-                  <td>NOMBRE</td>
-                  <td></td>
-                  <td></td>
-                </tr>
-              </thead>
-              <tbody>
-                {nutriologos.map(item=>{
-                  return(
-                    <tr key={item.id}>
-                      <td>{item.id}</td>
-                      <td>{item.user.name}</td>
-                      <td>
-                        <button className="btn btn-primary">Editar</button>
-                        <button className="btn btn-danger">Eliminar</button>
-                        </td>
-                    </tr>
-                  )
-                })}
-              </tbody>
-            </table>
-            </CCardBody>
-          </CCard>
-        </CCol>
-      </CRow> */}
-
     <CRow>
         <CCol>
           <CCard>
             <CCardHeader>
-              Nutriologos
+              Nutriólogos
+              <CIcon name="cil-plus" className="mfe-2" /> 
+              <CButton size="sm" color="primary">
+                Nuevo  
+              </CButton>
             </CCardHeader>
             <CCardBody>
             <CDataTable
               items={nutriologos}
               fields={fields}
+              columnFilter
+              tableFilter
+              footer
+              itemsPerPageSelect
+              itemsPerPage={5}
               hover
-              striped
-              bordered
-              size="sm"
-              itemsPerPage={10}
+              sorter
               pagination
               scopedSlots = {{
-                '':
-                  (item)=>(
-                    <td>
-                     <button className="btn btn-primary">
-                     <CIcon name="cil-pencil" className="mfe-2" /> 
-                       Editar
-                       </button>
-                        <button className="btn btn-danger">
-                        <CIcon name="cil-trash" className="mfe-2" /> 
-                        Eliminar
-                        </button>
-                    </td>
-                  )
-              }}
-            />
+                'Opciones':
+                  (item, index)=>{
+                    return (
+                      <td className="py-2">
+                        <CButton
+                          color="primary"
+                          variant="outline"
+                          shape="square"
+                          size="sm"
+                          onClick={()=>{toggleDetails(index)}}
+                        >
+                          {details.includes(index) ? 'Ocultar' : 'Opciones'}
+                        </CButton>
+                      </td>
+                      )
+                  },
+                'details':
+                    (item, index)=>{
+                      return (
+                      <CCollapse show={details.includes(index)}>
+                        <CCardBody>
+                          <h4>
+                            {item.nombre}
+                          </h4>
+                          <p className="text-muted">{/*User since: {item.categoria}} */}</p>
+                          <CButton size="sm" color="info">
+                          <CIcon name="cil-pencil" className="mfe-2" /> 
+                            Editar
+                          </CButton>
+                          <CButton size="sm" color="danger" className="ml-1">
+                          <CIcon name="cil-trash" className="mfe-2" /> 
+                            Eliminar
+                          </CButton>
+                        </CCardBody>
+                      </CCollapse>
+                    )
+                  }
+              }}/>
             </CCardBody>
           </CCard>
         </CCol>
-      </CRow>
+      </CRow>     
     </>
   )
 }

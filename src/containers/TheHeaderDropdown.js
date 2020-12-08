@@ -22,7 +22,6 @@ const TheHeaderDropdown = () => {
     history.push("/perfil");
   }
 
-
   return (
     <CDropdown
       inNav
