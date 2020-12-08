@@ -32,13 +32,32 @@ const Register = () => {
     event.preventDefault();
     try {
       const respon = await axios.post(
-        "http://3.90.64.114/api/v1/web/patient",
+        "http://3.90.64.114/api/v1/web/nutriologist",
         newnutriologistInfo
       );
       history.push("/login");
       alert("Cuenta registrada!");
     } catch (error) {
-      alert(error.response.data);
+      // Error
+      if (error.response) {
+        /*
+         * The request was made and the server responded with a
+         * status code that falls out of the range of 2xx
+         */
+        console.log(error.response.data);
+        console.log(error.response.status);
+      } else if (error.request) {
+        /*
+         * The request was made but no response was received, `error.request`
+         * is an instance of XMLHttpRequest in the browser and an instance
+         * of http.ClientRequest in Node.js
+         */
+        console.log(error.request);
+      } else {
+        // Something happened in setting up the request and triggered an Error
+        console.log("Error", error.message);
+      }
+      console.log(error);
     }
   };
 
@@ -94,8 +113,12 @@ const Register = () => {
               </div>
               <div className="col-sm-6 mb-1">
                 <label>Sexo</label>
-                <select className="form-control" name="sex">
-                  <option>Mujer</option>
+                <select
+                  className="form-control"
+                  name="sex"
+                  onChange={handleInputChange}
+                >
+                  <option>Mujer </option>
                   <option>Hombre</option>
                   <option>Prefiero no especificar</option>
                 </select>
