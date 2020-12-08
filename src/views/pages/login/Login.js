@@ -3,7 +3,13 @@ import Mynavbar from "../../Sharedcomponents/Mynavbar.js";
 import Myfooter from "../../Sharedcomponents/Myfooter.js";
 import axios from "axios";
 import { useHistory } from "react-router-dom";
-import { CButton } from "@coreui/react";
+import {
+  CButton,
+  CModal,
+  CModalHeader,
+  CModalBody,
+  CModalFooter,
+} from "@coreui/react";
 
 const Login = () => {
   let history = useHistory();
@@ -28,6 +34,12 @@ const Login = () => {
     } catch (error) {
       alert(error.response.data);
     }
+  };
+
+  const [modal, setModal] = useState(false);
+
+  const toggle = () => {
+    setModal(!modal);
   };
 
   return (
@@ -75,7 +87,9 @@ const Login = () => {
                 {/* <a href="" className="text-info">
                   ¿Olvidaste tu contraseña?
                 </a> */}
-                <CButton className="mr-1">¿Olvidaste tu contraseña? </CButton>
+                <CButton className="mr-1" onClick={toggle}>
+                  ¿Olvidaste tu contraseña?{" "}
+                </CButton>
               </div>
               <div className="col-sm-6 mb-1">
                 <a href="#register" className="text-info">
@@ -84,6 +98,16 @@ const Login = () => {
               </div>
             </div>
           </form>
+          <CModal show={modal} onClose={toggle}>
+            <CModalHeader closeButton>Modal title</CModalHeader>
+            <CModalBody>Lorem ipsum dolor...</CModalBody>
+            <CModalFooter>
+              <CButton color="primary">Do Something</CButton>{" "}
+              <CButton color="secondary" onClick={toggle}>
+                Cancel
+              </CButton>
+            </CModalFooter>
+          </CModal>
         </div>
       </div>
       <Myfooter></Myfooter>
