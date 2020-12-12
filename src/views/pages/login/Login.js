@@ -14,10 +14,18 @@ import {
 const Login = () => {
   let history = useHistory();
   const [userInfo, setUserInfo] = useState({ email: "", password: "" });
+  const [userEmail, setUserEmail] = useState({ email: "" });
 
   const handleInputChange = (event) => {
     setUserInfo({
       ...userInfo,
+      [event.target.name]: event.target.value,
+    });
+  };
+
+  const handleInputChangeModal = (event) => {
+    setUserEmail({
+      ...userEmail,
       [event.target.name]: event.target.value,
     });
   };
@@ -28,6 +36,20 @@ const Login = () => {
       const respon = await axios.post(
         "http://3.90.64.114/api/v1/web/login",
         userInfo
+      );
+      history.push("/dashboard");
+      alert("Bienvenido al sistema de nutrición");
+    } catch (error) {
+      alert(error.response.data);
+    }
+  };
+
+  const enviarEmail = async (event) => {
+    event.preventDefault();
+    try {
+      const respon = await axios.post(
+        "http://3.90.64.114/api/v1/web/login",
+        userEmail
       );
       history.push("/dashboard");
       alert("Bienvenido al sistema de nutrición");
@@ -84,9 +106,6 @@ const Login = () => {
             <hr className="my-4" />
             <div className="form-group row ">
               <div className="col-sm-6 mb-1">
-                {/* <a href="" className="text-info">
-                  ¿Olvidaste tu contraseña?
-                </a> */}
                 <CButton className="mr-1" onClick={toggle}>
                   ¿Olvidaste tu contraseña?{" "}
                 </CButton>
@@ -98,12 +117,33 @@ const Login = () => {
               </div>
             </div>
           </form>
+
+          {/* Parte del modal  */}
           <CModal show={modal} onClose={toggle}>
-            <CModalHeader closeButton>Modal title</CModalHeader>
-            <CModalBody>Lorem ipsum dolor...</CModalBody>
+            <CModalHeader closeButton>Recuperación de contraseña</CModalHeader>
+            <CModalBody>
+              <form onSubmit={enviarEmail}>
+                <p className="display-8 text-center">
+                  Ingresa tu correo para recuperar tu contraseña
+                </p>
+                <div className="form-group row ">
+                  <div className="col-sm-6 mb-1">
+                    <input
+                      type="email"
+                      className="form-control"
+                      placeholder="Correo electrónico"
+                      name="email"
+                      onChange={handleInputChangeModal}
+                    />
+                  </div>
+                </div>
+              </form>
+            </CModalBody>
             <CModalFooter>
-              <CButton color="primary">Do Something</CButton>{" "}
-              <CButton color="secondary" onClick={toggle}>
+              <CButton color="primary" onClick={enviarEmail}>
+                Enviar
+              </CButton>
+              <CButton color="danger" onClick={toggle}>
                 Cancel
               </CButton>
             </CModalFooter>
