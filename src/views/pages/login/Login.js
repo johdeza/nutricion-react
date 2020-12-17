@@ -39,6 +39,9 @@ const Login = () => {
       );
       history.push("/dashboard");
       alert("Bienvenido al sistema de nutrición");
+      localStorage.setItem("token", event["token"]);
+      localStorage.setItem("id", event["user"]["id"]);
+      localStorage.setItem("email", event["user"]["email"]);
     } catch (error) {
       alert(error.response.data);
     }
@@ -47,12 +50,12 @@ const Login = () => {
   const enviarEmail = async (event) => {
     event.preventDefault();
     try {
-      const respon = await axios.post(
-        "http://3.90.64.114/api/v1/web/login",
+      const respon = await axios.put(
+        "http://3.90.64.114/api/v1/web/user/account/restorePassword",
         userEmail
       );
-      history.push("/dashboard");
-      alert("Bienvenido al sistema de nutrición");
+      history.push("/");
+      alert("!Revisa tu correo!");
     } catch (error) {
       alert(error.response.data);
     }
